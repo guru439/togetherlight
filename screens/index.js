@@ -28,7 +28,7 @@ const LoginScreen = () => {
     posts = () => {
         navigation.navigate("Posts")
     }
-    const showAlert = (title,subtitle,style) => {
+    const showAlert = (title, subtitle, style) => {
         SweetAlert.showAlertWithOptions({
             title: title,
             subTitle: subtitle,
@@ -36,7 +36,7 @@ const LoginScreen = () => {
             confirmButtonColor: 'red',
             style: style,
             cancellable: true
-          },
+        },
             callback => console.log('callback'));
 
     }
@@ -74,61 +74,61 @@ const LoginScreen = () => {
                     <Text style={styles.Logintext} >Sign in</Text>
                 </View>
 
-            <View style={{backgroundColor:'#0D094E', margin:10, borderTopLeftRadius:20, borderTopRightRadius:100, borderBottomLeftRadius:20, borderBottomRightRadius:50}} >
-                
-                <View style={styles.SectionStyle}>
-                    <TextInput
-                        style={styles.inputStyle}
-                        onChangeText={(username) =>
-                            setusername(username)
-                        }
-                        placeholder="Enter UserName" //dummy@abc.com
-                        placeholderTextColor="#8b9cb5"
-                        autoCapitalize="none"
-                        keyboardType="email-address"
-                        returnKeyType="next"
-                        onSubmitEditing={() =>
-                            passwordInputRef.current &&
-                            passwordInputRef.current.focus()
-                        }
-                        underlineColorAndroid="#f000"
-                        blurOnSubmit={false}
-                    />
+                <View style={styles.Card}>
+
+                    <View style={styles.SectionStyle}>
+                        <TextInput
+                            style={styles.inputStyle}
+                            onChangeText={(username) =>
+                                setusername(username)
+                            }
+                            placeholder="Enter UserName" //dummy@abc.com
+                            placeholderTextColor="#8b9cb5"
+                            autoCapitalize="none"
+                            keyboardType="email-address"
+                            returnKeyType="next"
+                            onSubmitEditing={() =>
+                                passwordInputRef.current &&
+                                passwordInputRef.current.focus()
+                            }
+                            underlineColorAndroid="#f000"
+                            blurOnSubmit={false}
+                        />
+                    </View>
+                    <View style={styles.SectionStyle}>
+                        <TextInput
+                            style={styles.inputStyle}
+                            onChangeText={(Userpassword) =>
+                                setUserpassword(Userpassword)
+                            }
+                            placeholder="Enter password" //12345
+                            placeholderTextColor="#8b9cb5"
+                            keyboardType="default"
+                            ref={passwordInputRef}
+                            onSubmitEditing={Keyboard.dismiss}
+                            blurOnSubmit={false}
+                            secureTextEntry={true}
+                            underlineColorAndroid="#f000"
+                            returnKeyType="next"
+                        />
+                    </View>
+                    {errortext != '' ? (
+                        <Text style={styles.errorTextStyle}>
+                            {errortext}
+                        </Text>
+                    ) : null}
+                    <TouchableOpacity
+                        style={styles.buttonStyle}
+                        activeOpacity={0.5}
+                        onPress={handleSubmitPress}>
+                        <Text style={styles.buttonTextStyle}>LOGIN</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={posts}>
+                        <Text style={styles.posts}>Click here to go to Posts</Text>
+                    </TouchableOpacity>
                 </View>
-                <View style={styles.SectionStyle}>
-                    <TextInput
-                        style={styles.inputStyle}
-                        onChangeText={(Userpassword) =>
-                            setUserpassword(Userpassword)
-                        }
-                        placeholder="Enter password" //12345
-                        placeholderTextColor="#8b9cb5"
-                        keyboardType="default"
-                        ref={passwordInputRef}
-                        onSubmitEditing={Keyboard.dismiss}
-                        blurOnSubmit={false}
-                        secureTextEntry={true}
-                        underlineColorAndroid="#f000"
-                        returnKeyType="next"
-                    />
-                </View>
-                {errortext != '' ? (
-                    <Text style={styles.errorTextStyle}>
-                        {errortext}
-                    </Text>
-                ) : null}
-                <TouchableOpacity
-                    style={styles.buttonStyle}
-                    activeOpacity={0.5}
-                    onPress={handleSubmitPress}>
-                    <Text style={styles.buttonTextStyle}>LOGIN</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={posts}>
-                    <Text style={styles.posts}>Click here to go to Posts</Text>
-                </TouchableOpacity>
-            </View>
-        </ScrollView>
+            </ScrollView>
         </SafeAreaView>
     );
 };
@@ -157,8 +157,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginLeft: 25,
         marginRight: 35,
-        marginBottom:40,
-        marginTop:10
+        marginBottom: 40,
+        marginTop: 10
     },
     Section: {
         flexDirection: 'row',
@@ -173,14 +173,23 @@ const styles = StyleSheet.create({
         marginRight: 35,
         margin: 10,
     },
+    Card: {
+        backgroundColor: '#0D094E',
+        margin: 10, 
+        borderTopLeftRadius: 20, 
+        borderTopRightRadius: 100, 
+        borderBottomLeftRadius: 20, 
+        orderBottomRightRadius: 50
+
+    },
     posts: {
         flexDirection: 'row',
-        alignSelf:'center',
-        color:'#fff',
-        marginBottom:20,
-        borderBottomWidth:1,
-        borderBottomColor:'#fff',
-        borderStyle:'dotted'
+        alignSelf: 'center',
+        color: '#fff',
+        marginBottom: 20,
+        borderBottomWidth: 1,
+        borderBottomColor: '#fff',
+        borderStyle: 'dotted'
     },
     buttonStyle: {
         backgroundColor: '#fff',
@@ -201,7 +210,7 @@ const styles = StyleSheet.create({
         color: '#0D094E',
         paddingVertical: 10,
         fontSize: 20,
-        fontWeight:'bold'
+        fontWeight: 'bold'
     },
     inputStyle: {
         flex: 1,

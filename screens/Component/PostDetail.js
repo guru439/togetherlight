@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView, Text, View } from 'react-native';
+import { SafeAreaView, Text, View, StyleSheet } from 'react-native';
 const PostDetail = props => {
     const id = props.route.params.id;
     const [isLoading, setLoading] = useState(false);
@@ -22,15 +22,15 @@ const PostDetail = props => {
         getpost();
     }, []);
     return (
-        <SafeAreaView style={{flex:1, backgroundColor:'#fff'}} >
-        <View style={{ justifyContent: 'center', alignItems: 'center', }}>
+        <SafeAreaView style={styles.main} >
+        <View style={styles.loading}>
             {isLoading ? <Text>Loading...</Text> : 
             (
                 <View style={{padding:10}}>
-                    <Text style={{ alignItems: 'center', fontSize: 25, color: '#000', fontWeight:'bold',marginBottom:20 }}>{post.title}</Text>
-                    <Text><Text style={{color: '#000', marginTop:10, fontWeight:'bold'}}>User ID:</Text> {post.userId}</Text>
-                    <Text style={{color: '#000', marginTop:10, fontWeight:'bold'}}>Description</Text>
-                    <Text style={{color: '#000', marginTop:0}}>{post.body}</Text>
+                    <Text style={styles.title}>{post.title}</Text>
+                    <Text><Text style={styles.user}>User ID:</Text> {post.userId}</Text>
+                    <Text style={styles.text}>Description</Text>
+                    <Text style={styles.body}>{post.body}</Text>
                 </View>
             )}
         </View>
@@ -41,3 +41,36 @@ PostDetail.navigationOptions = {
     title: 'Post Details'
 };
 export default PostDetail;
+const styles = StyleSheet.create({
+    main:{
+        flex:1, 
+        backgroundColor:'#fff'
+    },
+    loading:{
+        justifyContent: 'center', 
+        alignItems: 'center',
+    },
+    title:{
+        alignItems: 'center', 
+        fontSize: 25, 
+        color: '#000', 
+        fontWeight:'bold',
+        marginBottom:20 
+    },
+    user:{
+        color: '#000', 
+        marginTop:10, 
+        fontWeight:'bold'
+    },
+    desc:{
+        color: '#000', 
+        marginTop:10, 
+        fontWeight:'bold'
+    },
+    body:{
+        color: '#000', 
+        marginTop:0
+    }
+
+
+});
