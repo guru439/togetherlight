@@ -5,7 +5,6 @@
  * @format
  */
 
-import React from 'react';
 import type { PropsWithChildren } from 'react';
 import {
   SafeAreaView,
@@ -29,6 +28,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from './screens';
 import Posts from './screens/Component/Posts';
 import PostDetail from './screens/Component/PostDetail';
+import { Provider } from 'react-redux';
+import store from './redux/store/store'
 
 
 type SectionProps = PropsWithChildren<{
@@ -45,46 +46,48 @@ function App(): JSX.Element {
   };
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login" >
-        <Stack.Screen
-          name="Login" options={{
-            title: 'Welcome Back!', headerStyle: {
-              backgroundColor: '#fff',
-            }, headerTitleStyle: {
-              color: '#0D094E',
-              fontSize: 30,
-              marginTop: 20,
-              fontWeight: 'bold'
-            }
-          }} component={LoginScreen} />
-        <Stack.Screen
-          name="Posts"
-          options={{
-            headerStyle: {
-              backgroundColor: '#fff',
-            }, headerTitleStyle: {
-              color: '#0D094E',
-              fontSize: 20,
-              fontWeight: 'bold',
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Login" >
+          <Stack.Screen
+            name="Login" options={{
+              title: 'Welcome Back!', headerStyle: {
+                backgroundColor: '#fff',
+              }, headerTitleStyle: {
+                color: '#0D094E',
+                fontSize: 30,
+                marginTop: 20,
+                fontWeight: 'bold'
+              }
+            }} component={LoginScreen} />
+          <Stack.Screen
+            name="Posts"
+            options={{
+              headerStyle: {
+                backgroundColor: '#fff',
+              }, headerTitleStyle: {
+                color: '#0D094E',
+                fontSize: 20,
+                fontWeight: 'bold',
 
-            }
-          }}
-          component={Posts} />
-        <Stack.Screen
-          options={{
-            headerStyle: {
-              backgroundColor: '#fff',
-            }, headerTitleStyle: {
-              color: '#0D094E',
-              fontSize: 20,
-              fontWeight: 'bold',
+              }
+            }}
+            component={Posts} />
+          <Stack.Screen
+            options={{
+              headerStyle: {
+                backgroundColor: '#fff',
+              }, headerTitleStyle: {
+                color: '#0D094E',
+                fontSize: 20,
+                fontWeight: 'bold',
 
-            }
-          }}
-          name="PostDetail" component={PostDetail} />
-      </Stack.Navigator>
-    </NavigationContainer>
+              }
+            }}
+            name="PostDetail" component={PostDetail} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 
