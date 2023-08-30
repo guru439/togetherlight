@@ -9,9 +9,13 @@ export const HIDE_LOADER="HIDE_LOADER"
 export const REMOVE_ERROR="REMOVE_ERROR"
 
 
-//------------LOGIN PROCESS-----------------------------------
+//------------POSTS PROCESS-----------------------------------
 export const GET_POSTS_START="GET_POSTS_START"
 export const UPDATE_POSTS_DATA_SUCCESS="UPDATE_POSTS_DATA_SUCCESS"
 export const UPDATE_POSTS_DATA_FAIL="UPDATE_POSTS_DATA_FAIL"
 export const POSTS_SUCCESS="POSTS_SUCCESS"
 export const POSTS_FAIL="POSTS_FAIL"
+
+//------------LOGIN PROCESS-----------------------------------
+export const UPDATE_USER_DATA_SUCCESS="UPDATE_POSTS_DATA_SUCCESS"
+export const UPDATE_USER_DATA_FAIL="UPDATE_POSTS_DATA_FAIL"

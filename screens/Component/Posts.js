@@ -2,11 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, RefreshControl, SafeAreaView, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useDispatch, useSelector } from 'react-redux';
+import { stateSelector } from '../../redux/selectors/selectors';
+import * as actionTypes from '../../redux/_ActionsType'
 const Posts = props => {
     const [isLoading, setLoading] = useState(false);
     const [posts, setposts] = useState([]);
     const [refreshing, setRefreshing] = React.useState(false);
     const navigation = useNavigation()
+    const dispatch = useDispatch()
+    const userState = useSelector(state=>stateSelector(state))
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
@@ -14,18 +19,27 @@ const Posts = props => {
     }, []);
 
     const getposts = () => {
-        // fetch('https://jsonplaceholder.typicode.com/posts/')
-        fetch('https://jsonplaceholder.typicode.com/posts ')
-            .then((response) => response.json())
-            .then((json) => setposts(json))
-            .catch((error) => console.error(error))
-            .finally(() => setLoading(false));
+        dispatch({
+            type: actionTypes.GET_POSTS_START
+        })
+        // fetch('https://jsonplaceholder.typicode.com/posts ')
+        //     .then((response) => response.json())
+        //     .then((json) => setposts(json))
+        //     .catch((error) => console.error(error))
+        //     .finally(() => setLoading(false));
         setTimeout(setRefreshing, 2000)
     }
     useEffect(() => {
         setLoading(true);
         getposts();
     }, []);
+
+    useEffect(()=>{
+        console.log(userState)
+        if(userState.posts){
+            setposts(userState.posts)
+        }
+    }, [userState])
 
     const handleClick = (item) => {
         navigation.navigate("PostDetail", {id: item.id})

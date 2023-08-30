@@ -4,8 +4,6 @@
  *
  * @format
  */
-
-import type { PropsWithChildren } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -31,20 +29,15 @@ import PostDetail from './screens/Component/PostDetail';
 import { Provider } from 'react-redux';
 import store from './redux/store/store'
 
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
 const Stack = createStackNavigator()
 
-function App(): JSX.Element {
+function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-
+  console.log(store)
   return (
     <Provider store={store}>
       <NavigationContainer>

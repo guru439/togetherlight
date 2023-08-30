@@ -14,7 +14,10 @@ import {
 
 } from 'react-native';
 import SweetAlert from 'react-native-sweet-alert';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { stateSelector } from '../redux/selectors/selectors';
+import { useEffect } from 'react';
+import * as actionTypes from '../redux/_ActionsType'
 
 
 const LoginScreen = () => {
@@ -22,6 +25,8 @@ const LoginScreen = () => {
     const [userpassword, setUserpassword] = useState('');
     const [errortext, setErrortext] = useState('');
     const navigation = useNavigation()
+    const userState = useSelector(state=>stateSelector(state))
+    const dispatch = useDispatch()
 
     const passwordInputRef = createRef();
 
@@ -36,8 +41,7 @@ const LoginScreen = () => {
             confirmButtonColor: 'red',
             style: style,
             cancellable: true
-        },
-            callback => console.log('callback'));
+        });
 
     }
 
@@ -58,11 +62,29 @@ const LoginScreen = () => {
     const LoginCheck = () => {
         if (username == "Admin" && userpassword == "Admin") {
             showAlert("Success", "Login successful.", "success")
+            dispatch({
+                type: actionTypes.UPDATE_USER_DATA_SUCCESS,
+                payload: {
+                    name: "Together Light"
+                }
+            })
         }
         else {
             showAlert("Error", "Login failed.", "error")
+            dispatch({
+                type: actionTypes.UPDATE_USER_DATA_FAIL,
+                payload: {
+                    message: "Login Failed"
+                }
+            })
         }
     }
+
+    useEffect(()=>{
+        if(userState.userDetails != null){
+            posts()
+        }
+    }, [userState])
 
     return (
         <SafeAreaView style={styles.mainBody}>
@@ -123,10 +145,10 @@ const LoginScreen = () => {
                         onPress={handleSubmitPress}>
                         <Text style={styles.buttonTextStyle}>LOGIN</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity
+                    {/* <TouchableOpacity
                         onPress={posts}>
                         <Text style={styles.posts}>Click here to go to Posts</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
             </ScrollView>
         </SafeAreaView>
