@@ -26,7 +26,7 @@ const LoginScreen = () => {
     const [errortext, setErrortext] = useState('');
     const [successtext, setSuccesstext] = useState('');
     const navigation = useNavigation()
-    const userState = useSelector(state=>stateSelector(state))
+    const userState = useSelector(state=>stateSelector(state)) //selecting current global state
     const dispatch = useDispatch()
 
     const passwordInputRef = createRef();
@@ -70,7 +70,7 @@ const LoginScreen = () => {
                 payload: {
                     name: "Together Light"
                 }
-            })
+            }) // Updating User Details to global state
         }
         else {
             setErrortext("Login failed.")
@@ -84,6 +84,7 @@ const LoginScreen = () => {
     }
 
     useEffect(()=>{
+        //Checking if global state initialised
         if(userState.userDetails != null){
             // posts()
         }
