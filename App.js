@@ -37,7 +37,6 @@ function App() {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-  console.log(store)
   return (
     <Provider store={store}>
       <NavigationContainer>

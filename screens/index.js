@@ -24,6 +24,7 @@ const LoginScreen = () => {
     const [username, setusername] = useState('');
     const [userpassword, setUserpassword] = useState('');
     const [errortext, setErrortext] = useState('');
+    const [successtext, setSuccesstext] = useState('');
     const navigation = useNavigation()
     const userState = useSelector(state=>stateSelector(state))
     const dispatch = useDispatch()
@@ -33,35 +34,37 @@ const LoginScreen = () => {
     posts = () => {
         navigation.navigate("Posts")
     }
-    const showAlert = (title, subtitle, style) => {
-        SweetAlert.showAlertWithOptions({
-            title: title,
-            subTitle: subtitle,
-            confirmButtonTitle: 'OK',
-            confirmButtonColor: 'red',
-            style: style,
-            cancellable: true
-        });
+    // const showAlert = (title, subtitle, style) => {
+    //     SweetAlert.showAlertWithOptions({
+    //         title: title,
+    //         subTitle: subtitle,
+    //         confirmButtonTitle: 'OK',
+    //         confirmButtonColor: 'red',
+    //         style: style,
+    //         cancellable: true
+    //     });
 
-    }
+    // }
 
     const handleSubmitPress = () => {
         setErrortext('');
         if (!username) {
             // alert('Please fill username');
-            showAlert("Error", "Please fill username", "error")
+            // alert("Please fill username")
+            setErrortext("Please fill username")
             return;
         }
         if (!userpassword) {
-            showAlert("Error", "Please fill password", "error")
+            setErrortext("Please fill password")
             return;
         }
-        setTimeout(LoginCheck, 100)
+        LoginCheck()
 
     };
     const LoginCheck = () => {
         if (username == "Admin" && userpassword == "Admin") {
-            showAlert("Success", "Login successful.", "success")
+            console.log("success")
+            setSuccesstext("Login successful.")
             dispatch({
                 type: actionTypes.UPDATE_USER_DATA_SUCCESS,
                 payload: {
@@ -70,7 +73,7 @@ const LoginScreen = () => {
             })
         }
         else {
-            showAlert("Error", "Login failed.", "error")
+            setErrortext("Login failed.")
             dispatch({
                 type: actionTypes.UPDATE_USER_DATA_FAIL,
                 payload: {
@@ -82,7 +85,7 @@ const LoginScreen = () => {
 
     useEffect(()=>{
         if(userState.userDetails != null){
-            posts()
+            // posts()
         }
     }, [userState])
 
@@ -104,7 +107,7 @@ const LoginScreen = () => {
                             onChangeText={(username) =>
                                 setusername(username)
                             }
-                            placeholder="Enter UserName" //dummy@abc.com
+                            placeholder="Enter UserName" //Admin
                             placeholderTextColor="#8b9cb5"
                             autoCapitalize="none"
                             keyboardType="email-address"
@@ -123,7 +126,7 @@ const LoginScreen = () => {
                             onChangeText={(Userpassword) =>
                                 setUserpassword(Userpassword)
                             }
-                            placeholder="Enter password" //12345
+                            placeholder="Enter password" //Admin
                             placeholderTextColor="#8b9cb5"
                             keyboardType="default"
                             ref={passwordInputRef}
@@ -139,11 +142,16 @@ const LoginScreen = () => {
                             {errortext}
                         </Text>
                     ) : null}
+                    {successtext != '' ? (
+                        <Text style={styles.successTextStyle}>
+                            {successtext}
+                        </Text>
+                    ) : null}
                     <TouchableOpacity
                         style={styles.buttonStyle}
                         activeOpacity={0.5}
                         onPress={handleSubmitPress}>
-                        <Text style={styles.buttonTextStyle}>LOGIN</Text>
+                        <Text onPress={handleSubmitPress} style={styles.buttonTextStyle}>LOGIN</Text>
                     </TouchableOpacity>
                     {/* <TouchableOpacity
                         onPress={posts}>
@@ -253,6 +261,11 @@ const styles = StyleSheet.create({
     },
     errorTextStyle: {
         color: 'red',
+        textAlign: 'center',
+        fontSize: 14,
+    },
+    successTextStyle: {
+        color: 'green',
         textAlign: 'center',
         fontSize: 14,
     },

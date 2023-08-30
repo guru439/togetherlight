@@ -1,5 +1,5 @@
 import * as actionTypes from "../_ActionsType"
-import * as API from "../../API_URI.js"
+import * as API from "../API_URI.js"
 import axios from "axios"
 
 // const accessToken = AsyncStorage.getItem('accessToken')

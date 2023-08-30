@@ -1,7 +1,7 @@
 import * as  actionTypes from "../_ActionsType"
 import {showLoader,hideLoader} from "../actions/_Loader"
 import {apiRequest} from "../actions/_API"
-import * as API from "../../API_URI"
+import * as API from "../API_URI"
 import AsyncStorage from '@react-native-community/async-storage';
 import * as RootNavigation from "../../navigation/RootNavigation"
 export const initiatePosts=({dispatch})=>next=>action=>{
