@@ -1,9 +1,5 @@
 {
   "compilerOptions": {
-    "jsx": "react-jsx",
-    "allowJs": true
-  },
-  "transform": {
-    "^.+\\.(t|j)sx?$": "ts-jest",
+    "jsx": "react-jsx"
   }
 }

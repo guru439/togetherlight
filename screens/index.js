@@ -63,7 +63,6 @@ const LoginScreen = () => {
     };
     const LoginCheck = () => {
         if (username == "Admin" && userpassword == "Admin") {
-            console.log("success")
             setSuccesstext("Login successful.")
             dispatch({
                 type: actionTypes.UPDATE_USER_DATA_SUCCESS,
@@ -150,8 +149,7 @@ const LoginScreen = () => {
                     ) : null}
                     <TouchableOpacity
                         style={styles.buttonStyle}
-                        activeOpacity={0.5}
-                        onPress={handleSubmitPress}>
+                        activeOpacity={0.5}>
                         <Text onPress={handleSubmitPress} style={styles.buttonTextStyle}>LOGIN</Text>
                     </TouchableOpacity>
                     {/* <TouchableOpacity

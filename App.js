@@ -47,7 +47,7 @@ function App() {
                 backgroundColor: '#fff',
               }, headerTitleStyle: {
                 color: '#0D094E',
-                fontSize: 30,
+                fontSize: 20,
                 marginTop: 20,
                 fontWeight: 'bold'
               }

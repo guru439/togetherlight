@@ -22,7 +22,7 @@ export const api = ({dispatch})=>next=>async action=>{
             }],
         }).then(res=>{
             if(res.request){
-                dispatch({type:onSuccess,payload:JSON.parse(res.request.response)})
+                dispatch({type:onSuccess,payload:JSON.parse(res.data)})
             }    
         })
         .catch(error=>{

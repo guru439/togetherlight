@@ -7,7 +7,7 @@ import * as RootNavigation from "../../navigation/RootNavigation"
 export const initiatePosts=({dispatch})=>next=>action=>{
     if(action.type===actionTypes.GET_POSTS_START){
         dispatch(showLoader())
-        dispatch(apiRequest('GET',API.POSTS,null,actionTypes.POSTS_SUCCESS,actionTypes.POSTS_FAIL,action.payload))
+        // dispatch(apiRequest('GET',API.POSTS,null,actionTypes.POSTS_SUCCESS,actionTypes.POSTS_FAIL,action.payload))
     }
     next(action)
 }

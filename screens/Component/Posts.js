@@ -14,11 +14,11 @@ const Posts = props => {
     const userState = useSelector(state=>stateSelector(state))
 
     const onRefresh = React.useCallback(() => {
-        setRefreshing(true);
         getposts()
     }, []);
 
     const getposts = () => {
+        setRefreshing(true)
         dispatch({
             type: actionTypes.GET_POSTS_START
         })
@@ -27,20 +27,21 @@ const Posts = props => {
         //     .then((json) => setposts(json))
         //     .catch((error) => console.error(error))
         //     .finally(() => setLoading(false));
-        setTimeout(setRefreshing, 2000)
     }
     useEffect(() => {
-        setLoading(true);
         getposts();
+        setLoading(true)
     }, []);
 
     useEffect(()=>{
-        console.log(userState)
-        if(userState.posts){
+        
+        if(userState.posts && userState.posts.length > 0){
             setposts(userState.posts)
+            setLoading(false)
+            setRefreshing(false)
         }
-    }, [userState])
-
+    }, [userState.posts])
+    console.log("POSTS", posts)
     const handleClick = (item) => {
         navigation.navigate("PostDetail", {id: item.id})
     }
@@ -55,10 +56,9 @@ const Posts = props => {
                 (
                     <FlatList
                         refreshControl={
-                            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                            <RefreshControl refreshing={isLoading} onRefresh={onRefresh} />
                         }
                         data={posts}
-                        keyExtractor={({ id }) => id.toString()}
                         renderItem={({ item }) =>
                             <>
                                 <TouchableOpacity onPress={()=>handleClick(item)} style={styles.Card}>
