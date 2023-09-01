@@ -9,11 +9,11 @@ export function* fetchPosts(action) {
         console.log(Api.BASE_API + Api.POSTS)
         const posts = yield call(getPosts);
         console.log(posts)
-        yield put({type: actionTypes.UPDATE_POSTS_DATA_SUCCESS, posts: posts});
+        yield put({type: actionTypes.UPDATE_POSTS_DATA_SUCCESS, payload: posts});
         return posts
    } catch (e) {
     console.log(e)
-      yield put({type: actionTypes.UPDATE_POSTS_DATA_FAIL, message: e.message});
+      yield put({type: actionTypes.UPDATE_POSTS_DATA_FAIL, payload: e.message});
       return e.message
    }
 }
@@ -21,5 +21,5 @@ export function* fetchPosts(action) {
 // Starts fetchPost on each dispatched POST_FETCH_REQUESTED action
 // Allows concurrent fetches of posts
 export default function* mySaga() {
-  yield takeEvery(actionTypes.GET_POSTS_START, fetchPosts);
+  // yield takeEvery(actionTypes.GET_POSTS_START, fetchPosts);
 }

@@ -86,7 +86,7 @@ const LoginScreen = () => {
     useEffect(()=>{
         //Checking if global state initialised
         if(userState.userDetails != null){
-            // posts()
+            posts()
         }
     }, [userState])
 
